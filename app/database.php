@@ -28,16 +28,10 @@ class Database{
         return $this->pdo;
     }
 
-    public function query($statement, $class_name){
+    public function query($statement, $class_name, $one = false){
         $req = $this->getPDO()->query($statement);
-        $datas = $req->fetchall(PDO::FETCH_CLASS, $class_name);
-        return $datas;
-    }
-
-    public function prepare($statement, $attributes, $class_name, $one = false){
-        $req = $this->getPDO()->prepare($statement);
-        $req->execute($attributes);
         $req->setFetchMode(PDO::FETCH_CLASS, $class_name);
+
         if($one){
             $datas = $req->fetch();
         } else{
@@ -45,6 +39,22 @@ class Database{
         }
         
         return $datas;
+        }
+
+        public function prepare($statement, $attributes, $class_name, $one = false){
+            $req = $this->getPDO()->prepare($statement);
+            $req->execute($attributes);
+            $req->setFetchMode(PDO::FETCH_CLASS, $class_name);
+            if($one){
+                $datas = $req->fetch();
+            } else{
+                $datas = $req->fetchAll();
+            }
+            
+            return $datas;
+        }
+    
     }
-}
+
+    
 ?>
