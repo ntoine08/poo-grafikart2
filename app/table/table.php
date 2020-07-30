@@ -4,14 +4,15 @@ namespace App\Table;
 use App\App;
 
 class Table{
+
     protected static $table;
 
     public static function find($id){
-        return App::getDb()->prepare("
+        return static::query("
             SELECT * 
             FROM " . static::$table . "
             WHERE id_categories = ?
-        ", [$id], get_called_class());
+        ", [$id], true);
     }
 
     public static function query($statement, $attributes = null, $one = false){
@@ -26,9 +27,7 @@ class Table{
     }
 
     public static function all(){
-        return App::getDb()->query("SELECT *
-                                    FROM " . static::$table . "
-                                    ", get_called_class(), true);
+        return App::getDb()->query("SELECT * FROM " . static::$table . " ", get_called_class());
     }
 
 

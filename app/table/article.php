@@ -14,13 +14,13 @@ class Article extends Table{
                                     ON article.id_categories = categories.id_categories');
     }
 
-    public static function lastByCategory($category_id){
+    public static function lastByCategory($id_categories){
         return self::query('SELECT id_article, article.titre, article.contenu, categories.titre as categorie
                                     FROM article
                                     LEFT JOIN categories
                                     ON article.id_categories = categories.id_categories
                                     WHERE article.id_categories = ?
-                                    ', [$category_id]);
+                                    ', [$id_categories]);
 
     }
 
