@@ -7,11 +7,22 @@ class Article extends Table{
 
     protected static $table = 'article';
 
+    public static function find($id){
+        return self::query("
+        SELECT id_article, article.titre, article.contenu, categories.titre as categorie
+        FROM article
+        LEFT JOIN categories
+        ON article.id_categories = categories.id_categories
+        WHERE id_article = ?
+        ", [$id], true);
+    }
+
     public static function getLast(){
         return self::query('SELECT id_article, article.titre, article.contenu, categories.titre as categorie
                                     FROM article
                                     LEFT JOIN categories
-                                    ON article.id_categories = categories.id_categories');
+                                    ON article.id_categories = categories.id_categories
+                                    ORDER BY article.date DESC');
     }
 
     public static function lastByCategory($id_categories){
@@ -20,6 +31,7 @@ class Article extends Table{
                                     LEFT JOIN categories
                                     ON article.id_categories = categories.id_categories
                                     WHERE article.id_categories = ?
+                                    ORDER BY article.date DESC
                                     ', [$id_categories]);
 
     }
