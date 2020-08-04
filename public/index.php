@@ -6,7 +6,7 @@ $app = App\App::getInstance();
 
 
 $posts = $app->getTable('Posts');
-$posts = $app->getTable('Categories');
+var_dump($posts->all());
 
 
 
