@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v4.0.1">
-    <title><?= App\App::getTitle(); ?></title>
+    <title><?= App::getInstance()->title; ?></title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/starter-template/">
 
@@ -46,7 +46,7 @@
   </head>
   <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-  <a class="navbar-brand" href="#">Navbar</a>
+  <a class="navbar-brand" href="index.php">Project name</a>
   
 </nav>
 
