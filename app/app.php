@@ -24,8 +24,8 @@ class App{
         Core\Autoloader::register();
     }
 
-    public function getTable($name){
-        $class_name = '\\App\\Table\\' .ucfirst($name) . 'Table';
+    public function getTable($name) {
+        $class_name = "\\App\\Table\\" . ucfirst($name) . 'Table';
         return new $class_name($this->getDb());
     }
 
